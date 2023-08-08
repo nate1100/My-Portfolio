@@ -1,6 +1,6 @@
 # My-Portfolio
 Eden Rose Nate | Bicol University | BSCS 
-# PROJECT 1: PhishCheck: A Browser-Based Extension FOR Phishing Attack Detection Using Machine Learning Approach <br />
+# \textcolor{blue}{blue} PROJECT 1: PhishCheck: A Browser-Based Extension FOR Phishing Attack Detection Using Machine Learning Approach <br />
 ## Project Overview
 *Collected large dataset from multiple resources including Phishtank,OpenPhish and Kaggle.<br />
 *Discovered the phishing anomaly using supervised algorithms such as Random Forest, SVM and XGBoost in terms of accuracy, precision, recall, f-measure and confusion matrix.<br />
