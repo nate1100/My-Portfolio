@@ -424,6 +424,16 @@ skplt.metrics.plot_confusion_matrix(y_test, y_pred, cmap='Blues', normalize=Fals
 ![](images/Picture18.png)
 ![](images/Picture19.png)
 
+### RANDOM FOREST 
+*The model was tested on a dataset containing a total of 50,452 URLs. The evaluation revealed that the model was able to accurately predict 29,316 legitimate URLs as true positives and 17,953 phishing URLs as true negatives. However, there were 961 false positive predictions and 2,222 false negative predictions.
+It can be concluded that the algorithm performed well in distinguishing between legitimate and phishing URLs. The high accuracy score of 93.78% indicates that the model was able to correctly predict the majority of the URLs. Moreover, the high precision score of 94.94%, recall score of 89.34%, and the f1-score of 92.05% indicates that the model had a moderate false negative rate, meaning that it was less successful in identifying legitimate URLs as legitimate.*
+
+### XGBOOST 
+*The XGBoost model, on the other hand, accurately predicted 29, 304 true positives and 16,883 true negatives correctly, with a total of 4,265 misclassifications consisting of false positives 973 and 3,292 false negatives. This led to the evaluation scores of the algorithm's performances which produced 91.71% accuracy, 94.61% precision, 84.25% recall and 89.13% f1-score.*
+
+### SUPPORT VECTOR MACHINE 
+*On the other hand, the SVM model accurately identified 28,932 legitimate classes as true positives (0) and 13,323 phishing classes as true negatives (1), it incorrectly classified 8,197 classes, including 1,345 false positives and 6,852 false negatives. As a result, the model's performance was evaluated, and it achieved an accuracy of 83.83%, a precision of 90.91%, a recall of 66.54%, and an f1-score of 76.84%.*
+
 # Significant Features of Phishing URLs
 The results show that the path length, URL Depth, Num_subdirs, num_params, entropy, length, num_digits, num_params, has_login, num_periods, URL_length, has_admin, host_length, Have_at, Prefix/Suffix, Redirection, num_enc_chars, has_client, TinyURL, host_is_ip, and has_server has the highest correlation among other features in the dataset. Thus, these features can be used to effectively and accurately predict phishing attempts with a high degree of confidence. 
 
@@ -494,7 +504,7 @@ plt.show()
 ![](images/Picture14.png)
 
 ```
-#4 ENTROPY
+#3. ENTROPY
 #plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'entropy'], label='Label 0', color='midnightblue')
 
@@ -519,7 +529,7 @@ print(max_val)
 ![](images/Picture16.png)
 
 ```
-#5. LENGTH
+#4. LENGTH
 #plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'length'], label='Label 0', color='midnightblue')
 
