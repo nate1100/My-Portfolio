@@ -420,9 +420,9 @@ print(confusion_matrix(y_test, y_pred))
 #displays the confusion matrix
 skplt.metrics.plot_confusion_matrix(y_test, y_pred, cmap='Blues', normalize=False, title = 'Confusion Matrix')
 ```
-![](images/7.png)
-![](images/7.png)
-![](images/7.png)
+![](images/8.png)
+![](images/Picture18.png)
+![](images/Picture19.png)
 
 # Significant Features of Phishing URLs
 The results show that the path length, URL Depth, Num_subdirs, num_params, entropy, length, num_digits, num_params, has_login, num_periods, URL_length, has_admin, host_length, Have_at, Prefix/Suffix, Redirection, num_enc_chars, has_client, TinyURL, host_is_ip, and has_server has the highest correlation among other features in the dataset. Thus, these features can be used to effectively and accurately predict phishing attempts with a high degree of confidence. 
@@ -471,9 +471,9 @@ print(max_val)
 least_val = df['path_length'].min()
 print(least_val)
 ```
-![](images/7.png)
+![](images/Picture13.png)
 ```
-#2. URL DEPTH
+#2. URL DEPTH AND NUMBER OF SUBDIRECTORIES
 #plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'URL_Depth'], label='Label 0', color='midnightblue')
 
@@ -491,31 +491,7 @@ plt.legend()
 #show the plot
 plt.show()
 ```
-![](images/7.png)
-
-
-```
-#3 NUMBER OF SUBDIRECTORIES
-
-#plot the data for label 0 in blue
-plt.plot(df.loc[df['label'] == 0, 'num_subdirs'], label='Label 0', color='midnightblue')
-
-#plot the data for label 1 in red
-plt.plot(df.loc[df['label'] == 1, 'num_subdirs'], label='Label 1', color='darkorange')
-
-#add labels and title
-plt.xlabel('Index')
-plt.ylabel('num_subdirs')
-plt.title('num_subdirs of URLs')
-
-#add legend
-plt.legend()
-
-#show the plot
-plt.show()
-```
-![](images/7.png)
-
+![](images/Picture14.png)
 
 ```
 #4 ENTROPY
@@ -540,8 +516,7 @@ plt.show()
 max_val = df['entropy'].max()
 print(max_val)  
 ```
-![](images/7.png)
-
+![](images/Picture16.png)
 
 ```
 #5. LENGTH
@@ -569,7 +544,6 @@ print(max_val)
 #find the least value in the column
 least_val = df['length'].min()
 print(least_val)
+```
+![](images/Picture17.png)
 
-![](images/7.png)
-![](images/7.png)
-![](images/7.png)
