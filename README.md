@@ -1,4 +1,5 @@
 # My-Portfolio
+Eden Rose Nate | Bicol University | BSCS 
 # Project 1: PHISHCHECK: A BROWSER-BASED EXTENSION FOR PHISHING ATTACK DETECTION USING MACHINE LEARNING APPROACH <br />
 ## Project Overview
 *Collected large dataset from multiple resources including Phishtank,OpenPhish and Kaggle.<br />
@@ -17,13 +18,13 @@ The study's data preparation is divided into two parts: data preprocessing and f
 The researchers used Python programming which uses libraries such as numpy, pandas, matplotlib and seaborn for the data preprocessing. Initially, the researchers combined all of the data cleaning into a single piece of code. After reviewing the dataset, it was discovered that there were numerous errors, including additional white spaces, null values, unnecessary columns, and duplicates. To further clean the dataset, the researchers concluded that these noises must be removed at each stage. 
 
 
-'import pandas as pd
+''' import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 #Import data
 data = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\cleaned_finaldataset.csv")
-data.head()'
+data.head() '''
 
 
