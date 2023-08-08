@@ -7,5 +7,6 @@
 *Developed a browser-based extension that shall automatically categorize each URL as legitimate or phishing.
 
 ## Architectural Paradigm of the Study
+This project used two important components further understand the cycle: the PhishCheck Chrome extension, which serves as the front-end, and Python, which serves as the study's back-end. Front-end components such as pop-up window and background scripts are some of the important parts of chrome extensions that were navigated first when users visit a website or enter a url in the pop-up address bar. <br />
 
-![alt text](image.jpg)
+![alt text](1.jpg)
