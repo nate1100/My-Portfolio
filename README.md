@@ -14,6 +14,7 @@ This project used two important components further understand the cycle: the Phi
 
 # Data Preparation
 The study's data preparation is divided into two parts: data preprocessing and feature engineering.
+
 ## A. Data Preprocessing 
 The researchers used Python programming which uses libraries such as numpy, pandas, matplotlib and seaborn for the data preprocessing. Initially, the researchers combined all of the data cleaning into a single piece of code. After reviewing the dataset, it was discovered that there were numerous errors, including additional white spaces, null values, unnecessary columns, and duplicates. To further clean the dataset, the researchers concluded that these noises must be removed at each stage. 
 
@@ -24,17 +25,17 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-#Import data
+#import data
 data = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\cleaned_finaldataset.csv")
 data.head() 
 
-#Displays the raw dataset
+#displays the raw dataset
 sns.set_theme(style="whitegrid")
 sns.countplot(x=data["label"])
 ```
 ![](images/3.png)
 
-*Based on the figure above, the raw dataset is composed of 594,907 URLs. A total of 345, 738 legitimate URLs were taken from Kaggle and labeled as 0 while 249, 169 phishing URLs labeled as 1 were taken from Phishtank, Openphish and Kaggle. *
+*Based on the figure above, the raw dataset is composed of 594,907 URLs. A total of 345, 738 legitimate URLs were taken from Kaggle and labeled as 0 while 249, 169 phishing URLs labeled as 1 were taken from Phishtank, Openphish and Kaggle.*
 
 ```
 #counts the values in label column 
@@ -51,16 +52,17 @@ def initial_read(data):
     print(data.isnull().sum())
     print('=====')
 
-#Displays the dataframe
+#displays the dataframe
 initial_read(data)
 
-#Replace missing data with the most frequent occurences 
+#replace missing data with the most frequent occurences 
 data1 = data.fillna(data.mode().iloc[0])
 data1.count
 
-# Check for and handle duplicates
+#check for and handle duplicates
 data1.drop_duplicates(inplace=True)
 ```
+
 ### Exports the cleaned dataset 
 ```
 #Saves the dataframe to CSV file
@@ -81,14 +83,12 @@ from json import dump
 from string import ascii_lowercase
 from numpy import array
 
-
 class LexicalURLFeature:
     def __init__(self, url):
         self.description = 'blah'
         self.url = url
         self.urlparse = urlparse(self.url)
         self.host = self.__get_ip()
-
 
     def __get_entropy(self, text):
         text = text.lower()
@@ -280,7 +280,7 @@ n_folds = 10
 # Split the dataset into training and testing sets using k-fold cross-validation
 kf = KFold(n_splits=n_folds, shuffle=True, random_state=42)
 ```
-*Additionally, 10-fold was selected to ensure that there’s no overfitting and bias in the dataset. Several folds were also applied in the model and the results showed 10 folds were the most accurate among other folds.
+*Additionally, 10-fold was selected to ensure that there’s no overfitting and bias in the dataset. Several folds were also applied in the model and the results showed 10 folds were the most accurate among other folds.*
 
 ![](images/4.png) 
 ![](images/5.png)
@@ -289,7 +289,7 @@ kf = KFold(n_splits=n_folds, shuffle=True, random_state=42)
 ### C. Resampling
 Random resampling is a method used in data mining to solve the problem of imbalanced data. This method is used to create a new transformed version of balance distribution without ignoring the minority classes. This method is helpful when training data as it also prioritizes the importance of minority classes in prediction. 
 
-*Two methods were used to execute resampling on the dataset. These are the undersampling and oversampling techniques. *
+*Two methods were used to execute resampling on the dataset. These are the undersampling and oversampling techniques.*
 ```
 #oversampling using SMOTE
 ros = SMOTE(random_state=42)
@@ -323,7 +323,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 # Load the CSV file into a dataframe
 df = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\Training\finaldataset.csv")
 ```
-*In hyperparameter tuning, the correlation-based feature selection (CFS) were used to maximize the performance of the three model. CFS has shown significant increase on the performance of the model which makes used of 20 features which is applied in this stage. *
+*In hyperparameter tuning, the correlation-based feature selection (CFS) were used to maximize the performance of the three model. CFS has shown significant increase on the performance of the model which makes used of 20 features which is applied in this stage.*
 
 ```
 #Perform feature selection using SelectKBest with mutual_info_classif as the scoring function
@@ -389,6 +389,7 @@ plt.title('Grid Search Results')
 plt.show()
 ```
 ![](images/Picture10.png)
+
 ```
 #plot the heatmap
 results = grid_search.cv_results_
@@ -401,7 +402,6 @@ df = df.rename(columns={'param_n_estimators': 'n_estimators', 'param_max_feature
 sns.set(rc={'figure.figsize':(20,10)})
 sns.heatmap(df.pivot_table(index=['n_estimators', 'max_features'], columns=['max_depth', 'min_samples_split', 'criterion'], values='mean_test_score'), cmap='YlGnBu', annot=True, fmt='.2f')
 ```
-
 ![](images/Picture11.png)
 
 
@@ -427,7 +427,7 @@ skplt.metrics.plot_confusion_matrix(y_test, y_pred, cmap='Blues', normalize=Fals
 # Significant Features of Phishing URLs
 The results show that the path length, URL Depth, Num_subdirs, num_params, entropy, length, num_digits, num_params, has_login, num_periods, URL_length, has_admin, host_length, Have_at, Prefix/Suffix, Redirection, num_enc_chars, has_client, TinyURL, host_is_ip, and has_server has the highest correlation among other features in the dataset. Thus, these features can be used to effectively and accurately predict phishing attempts with a high degree of confidence. 
 
-*Only 4 features was also selected to analyze the results effectively with the use of visualizations. 
+*Only 4 features was also selected to analyze the results effectively with the use of visualizations.*
 
 ```
 import pandas as pd
