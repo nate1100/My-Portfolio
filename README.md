@@ -69,7 +69,7 @@ data1.to_csv(r'C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\cleaned_finaldata
 
 ## B. Feature Engineering
 
-Feature engineering or feature extraction is a process of dimensionality reduction where the researchers take a set of data and transform it into a set of features that are easier to work with. In other words, this is the process of selecting and transforming the most pertinent variables from raw data when developing a prediction model using statistical modeling or machine learning. 
+Feature engineering or feature extraction is a process of dimensionality reduction where the researcher take a set of data and transform it into a set of features that are easier to work with. In other words, this is the process of selecting and transforming the most pertinent variables from raw data when developing a prediction model using statistical modeling or machine learning. 
 
 ```
 from math import log
@@ -223,16 +223,19 @@ with open('Dataset Features.csv', 'w', newline='') as f:
         writer.writerow(feature)
 
 ```
-The code outputs the 29 extracted features from the raw dataset which will be used for model training. 
+The code outputs the 29 extracted features from the raw dataset which are used for model training. 
 ![](images/9.png)
 
-*Feature engineering stage was also divided into three types: URL-based features, Address bar based Feature and Lexical-based Feature. *
+*Feature engineering stage was divided into three types: URL-based features, Address bar based Feature and Lexical-based Feature. *
 
 ### URL-based Features
 The features extracted from a URL are used to determine whether the URL is phishing or not. The quality of training data, and thus the quality of features fed into the model, determines the success of any learning effort. Thus, researchers must ensure that the extracted features represent or have the potential to identify the problem that they are attempting to model. The two sources of information used in extracting features are Address Bar based Features and Lexical based Features. 
 
 ### Address Bar based Features 
 The address bar-based features are extracted from a URL inputted in the address bar and extracts the specific features of an URL based on its characteristics or structure. 
+
+### Lexical-based Feature
+These refer to statistical features extracted from the literal URL string. For example, length of the URL string, number of digits, and number of parameters in its query part, if the URL is encoded. (Ikwu, 2022). The following features presented below are the important extracted lexical-based features from the URL string which shall be used in the study.
 
 
 
