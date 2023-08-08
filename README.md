@@ -17,7 +17,7 @@ The study's data preparation is divided into two parts: data preprocessing and f
 ## Data Preprocessing 
 The researchers used Python programming which uses libraries such as numpy, pandas, matplotlib and seaborn for the data preprocessing. Initially, the researchers combined all of the data cleaning into a single piece of code. After reviewing the dataset, it was discovered that there were numerous errors, including additional white spaces, null values, unnecessary columns, and duplicates. To further clean the dataset, the researchers concluded that these noises must be removed at each stage. 
 
-
+### Import the libraries and collected raw data for checking and data cleaning. 
 ```
 import pandas as pd
 import numpy as np
@@ -27,5 +27,12 @@ import matplotlib.pyplot as plt
 #Import data
 data = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\cleaned_finaldataset.csv")
 data.head() 
+
+#Displays the raw dataset
+sns.set_theme(style="whitegrid")
+sns.countplot(x=data["label"])
 ```
+![](images/1.png)
+Based on the figure, the raw dataset is composed of 
+
 
