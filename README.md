@@ -444,22 +444,22 @@ sns.heatmap(df.corr()[['label']].sort_values('label', ascending=False), annot=Tr
 # Show the plot
 plt.show()
 
-#1 PATH LENGTH 
+#1. PATH LENGTH 
 # Plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'path_length'], label='Label 0', color='midnightblue')
 
-# Plot the data for label 1 in red
+#plot the data for label 1 in red
 plt.plot(df.loc[df['label'] == 1, 'path_length'], label='Label 1', color='darkorange')
 
-# Add labels and title
+#add labels and title
 plt.xlabel('Index')
 plt.ylabel('path_length')
 plt.title('path_length of URLs')
 
-# Add legend
+#add legend
 plt.legend()
 
-# Show the plot
+#show the plot
 plt.show()
 
 #find the maximum value in the column
@@ -471,88 +471,95 @@ print(max_val)
 least_val = df['path_length'].min()
 print(least_val)
 ```
-
-
-
-#2 URL DEPTH
-# Plot the data for label 0 in blue
+![](images/7.png)
+```
+#2. URL DEPTH
+#plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'URL_Depth'], label='Label 0', color='midnightblue')
 
-# Plot the data for label 1 in red
+#plot the data for label 1 in red
 plt.plot(df.loc[df['label'] == 1, 'URL_Depth'], label='Label 1', color='darkorange')
 
-# Add labels and title
+#add labels and title
 plt.xlabel('Index')
 plt.ylabel('URL_Depth')
 plt.title('URL_Depth of URLs')
 
-# Add legend
+#add legend
 plt.legend()
 
-# Show the plot
+#show the plot
 plt.show()
+```
+![](images/7.png)
 
 
+```
 #3 NUMBER OF SUBDIRECTORIES
-# Plot the data for label 0 in blue
+
+#plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'num_subdirs'], label='Label 0', color='midnightblue')
 
-# Plot the data for label 1 in red
+#plot the data for label 1 in red
 plt.plot(df.loc[df['label'] == 1, 'num_subdirs'], label='Label 1', color='darkorange')
 
-# Add labels and title
+#add labels and title
 plt.xlabel('Index')
 plt.ylabel('num_subdirs')
 plt.title('num_subdirs of URLs')
 
-# Add legend
+#add legend
 plt.legend()
 
-# Show the plot
+#show the plot
 plt.show()
+```
+![](images/7.png)
 
 
+```
 #4 ENTROPY
-# Plot the data for label 0 in blue
+#plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'entropy'], label='Label 0', color='midnightblue')
 
-# Plot the data for label 1 in red
+#plot the data for label 1 in red
 plt.plot(df.loc[df['label'] == 1, 'entropy'], label='Label 1', color='darkorange')
 
-# Add labels and title
+#add labels and title
 plt.xlabel('Index')
 plt.ylabel('entropy')
 plt.title('entropy of URLs')
 
-# Add legend
+#add legend
 plt.legend()
 
-# Show the plot
+#show the plot
 plt.show()
-
-
 
 #find the maximum value in the column
 max_val = df['entropy'].max()
 print(max_val)  
+```
+![](images/7.png)
 
 
-#5 LENGTH
-# Plot the data for label 0 in blue
+```
+#5. LENGTH
+#plot the data for label 0 in blue
 plt.plot(df.loc[df['label'] == 0, 'length'], label='Label 0', color='midnightblue')
 
-# Plot the data for label 1 in red
+#plot the data for label 1 in red
 plt.plot(df.loc[df['label'] == 1, 'length'], label='Label 1', color='darkorange')
 
-# Add labels and title
+#add labels and title
 plt.xlabel('Index')
 plt.ylabel('length')
 plt.title('length of URLs')
 
-# Add legend
+#add legend
 plt.legend()
 
-# Show the plot
+#show the plot
 plt.show()
 
 #find the maximum value in the column
