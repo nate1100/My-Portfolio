@@ -237,5 +237,332 @@ The address bar-based features are extracted from a URL inputted in the address 
 ### Lexical-based Feature
 These refer to statistical features extracted from the literal URL string. For example, length of the URL string, number of digits, and number of parameters in its query part, if the URL is encoded. (Ikwu, 2022). The following features presented below are the important extracted lexical-based features from the URL string which shall be used in the study.
 
+# Modeling
+This phase makes use of machine learning algorithms and various modeling techniques on data that has been processed and extracted in the data preparation phase in order to select, train, and test the most appropriate modeling techniques.
+
+## Modeling Techniques
+### A. Correlation-based Feature Selection
+Feature selection is the process of selecting the most important features to input in machine learning algorithms. It is the process to automatically or manually select those features that contribute most to the prediction variable or output (Shaikh, 2018). 
+
+```
+# Perform feature selection using SelectKBest with mutual_info_classif as the scoring function
+selector = SelectKBest(score_func=mutual_info_classif, k=20)  
+X_selected = selector.fit_transform(X, y)
+
+# Display the selected features with corresponding values
+selected_features = X.columns[selector.get_support()]
+selected_scores = selector.scores_[selector.get_support()]
+feature_scores = pd.DataFrame({'Features': selected_features, 'Scores': selected_scores})
+print(feature_scores)
+
+# sort feature scores in descending order
+feature_scores_sorted = feature_scores.sort_values('Scores', ascending=False)
+
+# create bar plot of feature scores
+plt.figure(figsize=(10, 8))
+plt.barh(feature_scores_sorted['Features'], feature_scores_sorted['Scores'], color='blue')
+plt.title('Feature Scores using CFS')
+plt.xlabel('Score')
+plt.ylabel('Feature')
+plt.show()
+```
+![](images/Picture12.png)
+
+*The k parameter is set to 20, which specifies that the top 20 features with the highest scores are selected. The fit_transform method fits the SelectKBest model to the data and transforms the input data to include only the selected features.*
+
+### B. K-Fold Cross Validation 
+Cross validation is a useful technique that determines how well the model performed, and it is always necessary to assess the model's accuracy to ensure that it was properly trained using the data and did not overfit or underfit. The most common cross-validation method is known as K-fold cross-validation, where a subset of the training data is used as the validation set. In k-fold cross validation, the dataset is divided into k groups or folds, and the model is trained on k-1 while the last one is kept for testing. 
+
+```
+ Define the number of folds
+n_folds = 10
+
+# Split the dataset into training and testing sets using k-fold cross-validation
+kf = KFold(n_splits=n_folds, shuffle=True, random_state=42)
+```
+*Additionally, 10-fold was selected to ensure that there’s no overfitting and bias in the dataset. Several folds were also applied in the model and the results showed 10 folds were the most accurate among other folds.
+
+![](images/4.png) 
+![](images/5.png)
+![](images/7.png)
+
+### C. Resampling
+Random resampling is a method used in data mining to solve the problem of imbalanced data. This method is used to create a new transformed version of balance distribution without ignoring the minority classes. This method is helpful when training data as it also prioritizes the importance of minority classes in prediction. 
+
+*Two methods were used to execute resampling on the dataset. These are the undersampling and oversampling techniques. *
+```
+#oversampling using SMOTE
+ros = SMOTE(random_state=42)
+X_train_resampled_o, y_train_resampled_o = ros.fit_resample(X_train, y_train)
+
+#define the model
+model_ros = RandomForestClassifier(random_state=42)
+
+----------------------------------------------------------------------------------------------------------
+#undersampling
+rus = RandomUnderSampler(random_state=42)
+X_train_resampled_u, y_train_resampled_u = rus.fit_resample(X_train, y_train)
+
+#train and evaluate the model with RandomUnderSampler
+model_rus = RandomForestClassifier(random_state=42)
+```
+### D. Model Optimization using Hyperparameter Tuning
+To further improve the accuracy and performance of the machine learning model, hyperparameter tuning was applied on the most efficient algorithm. Hyperparameters are variables that are set before the training process begins and cannot be learned from the data.  Grid search is a popular technique used in machine learning to find the best hyperparameters for a model. The grid search technique involves defining a grid of possible values for each hyperparameter and training the model with each possible combination of hyperparameters. 
+
+```
+#Import libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.feature_selection import SelectKBest, mutual_info_classif
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split, KFold, GridSearchCV
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+# Load the CSV file into a dataframe
+df = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\Training\finaldataset.csv")
+```
+*In hyperparameter tuning, the correlation-based feature selection (CFS) were used to maximize the performance of the three model. CFS has shown significant increase on the performance of the model which makes used of 20 features which is applied in this stage. *
+
+```
+#Perform feature selection using SelectKBest with mutual_info_classif as the scoring function
+selector = SelectKBest(score_func=mutual_info_classif, k=20)  
+X_selected = selector.fit_transform(X, y)
+
+#Display the selected features with corresponding values
+selected_features = X.columns[selector.get_support()]
+selected_scores = selector.scores_[selector.get_support()]
+feature_scores = pd.DataFrame({'Features': selected_features, 'Scores': selected_scores})
+print(feature_scores)
+
+#split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X_selected, y, random_state=42, test_size=0.20) #80% training and 20% test data
+
+rf= RandomForestClassifier(random_state=42)
+
+#define the grid search parameters
+param_grid = {'n_estimators': [20, 50, 100, 150, 200, 300], 
+              'max_features': ['auto', 'sqrt', 'log2'], 
+              'max_depth': [10, 20, 30, 40], 
+              'min_samples_split': [2, 5, 10],
+              'criterion': ['gini', 'entropy']}
+
+#perform k-fold cross validation and grid search
+kf = KFold(n_splits=10, shuffle=True, random_state=42)
+grid_search = GridSearchCV(rf, param_grid, cv=kf, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+
+#plot the results
+results = grid_search.cv_results_
+params = results['params']
+mean_scores = results['mean_test_score']
+
+#print the best parameters and score
+print("Best parameters: ", grid_search.best_params_)
+print("Best score: ", grid_search.best_score_)
+
+# make predictions using the best parameters
+best_rf = grid_search.best_estimator_
+y_pred = best_rf.predict(X_test)
+
+#evaluate the performance of the model
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test,y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+#print the results
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1 score:", f1)
+
+# Extract scores
+scores = grid_search.cv_results_['mean_test_score']
+
+# Create histogram
+plt.hist(scores, bins=len(set(scores)), color='blue')
+plt.xlabel('Accuracy')
+plt.ylabel('Count')
+plt.title('Grid Search Results')
+plt.show()
+```
+![](images/Picture10.png)
+```
+#plot the heatmap
+results = grid_search.cv_results_
+df = pd.DataFrame.from_dict(results)
+df = df[['param_n_estimators', 'param_max_features', 'param_max_depth', 'param_min_samples_split', 'param_criterion', 'mean_test_score']]
+df = df.sort_values(by=['param_n_estimators', 'param_max_features', 'param_max_depth', 'param_min_samples_split', 'param_criterion'])
+df['mean_test_score'] = df['mean_test_score'] * 100
+df = df.rename(columns={'param_n_estimators': 'n_estimators', 'param_max_features': 'max_features', 'param_max_depth': 'max_depth', 'param_min_samples_split': 'min_samples_split', 'param_criterion': 'criterion'})
+
+sns.set(rc={'figure.figsize':(20,10)})
+sns.heatmap(df.pivot_table(index=['n_estimators', 'max_features'], columns=['max_depth', 'min_samples_split', 'criterion'], values='mean_test_score'), cmap='YlGnBu', annot=True, fmt='.2f')
+```
+
+![](images/Picture11.png)
 
 
+# Model Performance Comparison and Visualization of Features
+After completing the training process, the model generated a confusion matrix by utilizing the predicted labels of the test data and the true labels of the same data. A confusion matrix is a matrix of size N x N that helps to assess the effectiveness of a classification model. 
+
+```
+#Print the average scores across all folds
+print("Average accuracy:", np.mean(accuracy_scores))
+print("Average precision:", np.mean(precision_scores))
+print("Average recall:", np.mean(recall_scores))
+print("Average F1 score:", np.mean(f1_scores))
+
+print(confusion_matrix(y_test, y_pred))
+
+#displays the confusion matrix
+skplt.metrics.plot_confusion_matrix(y_test, y_pred, cmap='Blues', normalize=False, title = 'Confusion Matrix')
+```
+![](images/7.png)
+![](images/7.png)
+![](images/7.png)
+
+# Significant Features of Phishing URLs
+The results show that the path length, URL Depth, Num_subdirs, num_params, entropy, length, num_digits, num_params, has_login, num_periods, URL_length, has_admin, host_length, Have_at, Prefix/Suffix, Redirection, num_enc_chars, has_client, TinyURL, host_is_ip, and has_server has the highest correlation among other features in the dataset. Thus, these features can be used to effectively and accurately predict phishing attempts with a high degree of confidence. 
+
+*Only 4 features was also selected to analyze the results effectively with the use of visualizations. 
+
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the CSV file into a dataframe
+df = pd.read_csv(r"C:\Users\user\OneDrive\Desktop\Thesis1_Phishing\final dataset\finaldataset.csv")
+
+#Heatmap for Feature Correlation
+plt.figure(figsize=(4,10))
+sns.heatmap(df.corr()[['label']].sort_values('label', ascending=False), annot=True);
+# Show the plot
+plt.show()
+
+#1 PATH LENGTH 
+# Plot the data for label 0 in blue
+plt.plot(df.loc[df['label'] == 0, 'path_length'], label='Label 0', color='midnightblue')
+
+# Plot the data for label 1 in red
+plt.plot(df.loc[df['label'] == 1, 'path_length'], label='Label 1', color='darkorange')
+
+# Add labels and title
+plt.xlabel('Index')
+plt.ylabel('path_length')
+plt.title('path_length of URLs')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+
+#find the maximum value in the column
+max_val = df['path_length'].max()
+
+print(max_val)  
+
+#find the least value in the column
+least_val = df['path_length'].min()
+print(least_val)
+```
+
+
+
+#2 URL DEPTH
+# Plot the data for label 0 in blue
+plt.plot(df.loc[df['label'] == 0, 'URL_Depth'], label='Label 0', color='midnightblue')
+
+# Plot the data for label 1 in red
+plt.plot(df.loc[df['label'] == 1, 'URL_Depth'], label='Label 1', color='darkorange')
+
+# Add labels and title
+plt.xlabel('Index')
+plt.ylabel('URL_Depth')
+plt.title('URL_Depth of URLs')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+#3 NUMBER OF SUBDIRECTORIES
+# Plot the data for label 0 in blue
+plt.plot(df.loc[df['label'] == 0, 'num_subdirs'], label='Label 0', color='midnightblue')
+
+# Plot the data for label 1 in red
+plt.plot(df.loc[df['label'] == 1, 'num_subdirs'], label='Label 1', color='darkorange')
+
+# Add labels and title
+plt.xlabel('Index')
+plt.ylabel('num_subdirs')
+plt.title('num_subdirs of URLs')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+#4 ENTROPY
+# Plot the data for label 0 in blue
+plt.plot(df.loc[df['label'] == 0, 'entropy'], label='Label 0', color='midnightblue')
+
+# Plot the data for label 1 in red
+plt.plot(df.loc[df['label'] == 1, 'entropy'], label='Label 1', color='darkorange')
+
+# Add labels and title
+plt.xlabel('Index')
+plt.ylabel('entropy')
+plt.title('entropy of URLs')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+
+#find the maximum value in the column
+max_val = df['entropy'].max()
+print(max_val)  
+
+
+#5 LENGTH
+# Plot the data for label 0 in blue
+plt.plot(df.loc[df['label'] == 0, 'length'], label='Label 0', color='midnightblue')
+
+# Plot the data for label 1 in red
+plt.plot(df.loc[df['label'] == 1, 'length'], label='Label 1', color='darkorange')
+
+# Add labels and title
+plt.xlabel('Index')
+plt.ylabel('length')
+plt.title('length of URLs')
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.show()
+
+#find the maximum value in the column
+max_val = df['length'].max()
+print(max_val)  
+
+#find the least value in the column
+least_val = df['length'].min()
+print(least_val)
+
+![](images/7.png)
+![](images/7.png)
+![](images/7.png)
