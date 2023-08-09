@@ -639,7 +639,8 @@ endDate = '2022-03-25 23:59:59' #set end date
 scrapeTweet(searchTerms, limit, startDate, endDate, outputFile)
 ```
 
-| Syntax | Description |
-| --- | ----------- |
-| Header | Title |
-| Paragraph | Text |
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
