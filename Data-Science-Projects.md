@@ -1,6 +1,6 @@
 # My-Portfolio
 Eden Rose Nate | Bicol University | BSCS 
-# PROJECT 1: PhishCheck: A Browser-Based Extension FOR Phishing Attack Detection Using Machine Learning Approach <br />
+# PROJECT 1: PhishCheck: A Browser-Based Extension for Phishing Attack Detection Using Machine Learning Approach <br />
 ## Project Overview
 *Collected large dataset from multiple resources including Phishtank,OpenPhish and Kaggle.<br />
 *Discovered the phishing anomaly using supervised algorithms such as Random Forest, SVM and XGBoost in terms of accuracy, precision, recall, f-measure and confusion matrix.<br />
@@ -16,7 +16,7 @@ This project used two important components to further understand the cycle: the 
 The study's data preparation is divided into two parts: data preprocessing and feature engineering.
 
 ## A. Data Preprocessing 
-The researchers used Python programming which uses libraries such as numpy, pandas, matplotlib and seaborn for the data preprocessing. Initially, the researchers combined all of the data cleaning into a single piece of code. After reviewing the dataset, it was discovered that there were numerous errors, including additional white spaces, null values, unnecessary columns, and duplicates. To further clean the dataset, the researchers concluded that these noises must be removed at each stage. 
+The researchers used Python programming which uses libraries such as numpy, pandas, matplotlib and seaborn for the data preprocessing. Initially, all of the data cleaning method was combined into a single piece of code. After reviewing the dataset, it was discovered that there were numerous errors, including additional white spaces, null values, unnecessary columns, and duplicates. To further clean the dataset, it was concluded that these noises must be removed at each stage. 
 
 ### Import the libraries and collected raw data for checking and data cleaning. 
 ```
@@ -223,10 +223,11 @@ with open('Dataset Features.csv', 'w', newline='') as f:
         writer.writerow(feature)
 
 ```
-The code outputs the 29 extracted features from the raw dataset which are used for model training. 
+*The code outputs the 29 extracted features from the raw dataset which are used for model training.*
+
 ![](images/9.png)
 
-*Feature engineering stage was divided into three types: URL-based features, Address bar based Feature and Lexical-based Feature. *
+*Feature engineering stage was also divided into three types: URL-based features, Address bar based Feature and Lexical-based Feature. *
 
 ### URL-based Features
 The features extracted from a URL are used to determine whether the URL is phishing or not. The quality of training data, and thus the quality of features fed into the model, determines the success of any learning effort. Thus, researchers must ensure that the extracted features represent or have the potential to identify the problem that they are attempting to model. The two sources of information used in extracting features are Address Bar based Features and Lexical based Features. 
@@ -271,7 +272,7 @@ plt.show()
 *The k parameter is set to 20, which specifies that the top 20 features with the highest scores are selected. The fit_transform method fits the SelectKBest model to the data and transforms the input data to include only the selected features.*
 
 ### B. K-Fold Cross Validation 
-Cross validation is a useful technique that determines how well the model performed, and it is always necessary to assess the model's accuracy to ensure that it was properly trained using the data and did not overfit or underfit. The most common cross-validation method is known as K-fold cross-validation, where a subset of the training data is used as the validation set. In k-fold cross validation, the dataset is divided into k groups or folds, and the model is trained on k-1 while the last one is kept for testing. 
+Cross validation is a useful technique that determines how well the model performed, and it is always necessary to assess the model's accuracy to ensure that it was properly trained using the data and did not overfit or underfit. The most common cross-validation method is known as K-fold cross-validation, where a subset of the training data is used as the validation set. In k-fold cross validation, the dataset is divided into k groups or folds, and the model is trained on k-1 while the last one is kept for testing.
 
 ```
  Define the number of folds
@@ -290,22 +291,64 @@ kf = KFold(n_splits=n_folds, shuffle=True, random_state=42)
 Random resampling is a method used in data mining to solve the problem of imbalanced data. This method is used to create a new transformed version of balance distribution without ignoring the minority classes. This method is helpful when training data as it also prioritizes the importance of minority classes in prediction. 
 
 *Two methods were used to execute resampling on the dataset. These are the undersampling and oversampling techniques.*
+
 ```
-#oversampling using SMOTE
+#Oversampling using SMOTE
 ros = SMOTE(random_state=42)
 X_train_resampled_o, y_train_resampled_o = ros.fit_resample(X_train, y_train)
 
 #define the model
 model_ros = RandomForestClassifier(random_state=42)
 
-----------------------------------------------------------------------------------------------------------
-#undersampling
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Undersampling
 rus = RandomUnderSampler(random_state=42)
 X_train_resampled_u, y_train_resampled_u = rus.fit_resample(X_train, y_train)
 
 #train and evaluate the model with RandomUnderSampler
 model_rus = RandomForestClassifier(random_state=42)
 ```
+*Combining the two sampling methods was also executed to balance the dataset and test if the model's performance increased.*
+
+```
+#Oversampling and Undersampling
+#split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X_selected, y, random_state=42, test_size=0.20) #70% training and 30% test
+
+clf = RandomForestClassifier(random_state=42)
+ros = SMOTE(sampling_strategy=0.8)
+rus = RandomUnderSampler(sampling_strategy=0.9)
+
+steps = [('over', ros), ('under', rus), ('model', clf)]
+pipeline = Pipeline(steps=steps)
+
+#perform k-fold cross-validation
+cv_scores = cross_val_score(pipeline, X_selected, y, cv=10)
+
+print("Cross-validation scores:", cv_scores)
+print("Average cross-validation score:", cv_scores.mean())
+
+#fit the pipeline on the training data
+pipeline.fit(X_train, y_train)
+
+#make predictions on the test data
+y_pred = pipeline.predict(X_test)
+
+#evaluate the performance of the pipeline
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1 score:", f1)
+
+#count the total resampled data
+counter_resampled = Counter(y_train)
+print('After resampling:', counter_resampled)
+```
+
 ### D. Model Optimization using Hyperparameter Tuning
 To further improve the accuracy and performance of the machine learning model, hyperparameter tuning was applied on the most efficient algorithm. Hyperparameters are variables that are set before the training process begins and cannot be learned from the data.  Grid search is a popular technique used in machine learning to find the best hyperparameters for a model. The grid search technique involves defining a grid of possible values for each hyperparameter and training the model with each possible combination of hyperparameters. 
 
@@ -557,3 +600,7 @@ print(least_val)
 ```
 ![](images/Picture17.png)
 
+### Conclusion 
+*The results of the experiments show that combining K-fold Cross Validation and Correlation-based Feature Selection obtained the highest achieved evaluation score for Random Forest resulting in an accuracy of 93.78%, precision of 94.94%, recall of 89.34% and F-1 score of 92.05 which outperforms the XGBoost and SVM algorithms.<br />
+*The most significant features based on the scoring function of Correlation-based Feature Selection are path length, URL depth, number of subdirectories, entropy, and URL length.<br />
+*The Random Forest has been successfully applied and integrated into the browser-based extension, which automatically identifies the classification of URLs (phishing or legitimate).
