@@ -891,9 +891,9 @@ barplot(tdm[1:20,]$freq, las = 2, names.arg = tdm[1:20,]$word,
         col ="blue", main ="Top 20 Most Frequent Words (Isko)",
         ylab = "Word frequencies")
 ```
-![](images/Picture10.png)
-![](images/Picture10.png)
-![](images/Picture10.png)
+![](images/B4.png)
+![](images/B5.png)
+![](images/B6.png)
 
 
 ### Word Clouds
@@ -906,19 +906,9 @@ wordcloud(words = tdm$word, freq = tdm$freq, min.freq = 5,
           max.words=100, random.order=FALSE, rot.per=0.40, 
           colors=brewer.pal(8, "Dark2"))
 ```
-![](images/Picture10.png)
-![](images/Picture10.png)
-![](images/Picture10.png)
-
- ```  
-#bar plot for random words
-w <- rowSums(tdm)
-w <- subset(w, w>=20)
-barplot(w,
-        las = 2,
-        col = rainbow(50))
-```
-![](images/Picture10.png)
+![](images/B1.png)
+![](images/B2.png)
+![](images/B3.png)
 
 ```
 #sentiment Analysis using NRC dictionary- based approach
@@ -945,9 +935,9 @@ head(emotions,10)
 #bar plot for sentiment scores
 barplot(colSums(s), col = rainbow(10), ylab = 'count', main = 'Sentiment Results (leni)')
 ```
-![](images/Picture10.png)
-![](images/Picture10.png)
-![](images/Picture10.png)
+![](images/B7.png)
+![](images/B8.png)
+![](images/B9.png)
 
 ```
 #plot the count of words associated with 8 emotions, expressed as a percentage
@@ -959,9 +949,9 @@ barplot(
   main = "Emotion in Text ", xlab="Percentage"
 )
 ```
-![](images/Picture10.png)
-![](images/Picture10.png)
-![](images/Picture10.png)
+![](images/B10.png)
+![](images/B11.png)
+![](images/B12.png)
 
 
 
