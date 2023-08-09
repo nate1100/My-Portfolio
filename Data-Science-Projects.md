@@ -973,13 +973,12 @@ In sex group, there are no significant difference between which gender develops 
 
 
 ### Histologic Types of cancer
-Histologic Types, these data show which type of cancer developed with the primary tumor. It can be seen that the “adeno” has a significant difference between the other two histologic types. On the other hand, “no_info” indicates that there is no histologic type of cancer that came with the primary tumor.	
+These data show which type of cancer developed with the primary tumor. It can be seen that the “adeno” has a significant difference between the other two histologic types. On the other hand, “no_info” indicates that there is no histologic type of cancer that came with the primary tumor.	
 
 ![](images/C3.png)
 
 ### Classes
-Classes, the most common location where the tumor has metastasized is the lungs. Followed by stomach, ovary, pancreas, and breast respectively.  
-The least common locations are the testis, vagina, salivary glands,  cervix, and bladder.
+Classes, the most common location where the tumor has metastasized is the lungs. Followed by stomach, ovary, pancreas, and breast respectively. The least common locations are the testis, vagina, salivary glands,  cervix, and bladder.
 
 ![](images/C4.png)
 
@@ -987,7 +986,7 @@ The least common locations are the testis, vagina, salivary glands,  cervix, and
 
 The figure presents the visualizations of the results from the mined rules using apriori algorithm. The plot function and its graph parameter has been used. The closer the rule node is to the center, the more significant it is.
 
-*Only the top three classes with the most instances have been used here in the paper as an example. The Lung class with 84 instances, Stomach with 39 instances, and lastly the Ovary with 29 instances. These Classes used 5% as the lower bound value for the support and 0.8 confidence as the minimum value for selection.*
+*Only the top three classes with the most instances have been used here as an example. The Lung class with 84 instances, Stomach with 39 instances, and lastly the Ovary with 29 instances. These classes used 5% as the lower bound value for the support and 0.8 confidence as the minimum value for selection.*
 
 ![](images/C5.png)
 ![](images/C6.png)
