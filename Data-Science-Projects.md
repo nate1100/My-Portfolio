@@ -841,6 +841,7 @@ createDataFrame <- function(cleanTweet) {
 ```
 
 ## Data Visualization
+Data visualization refers to the representation of information and data through visual means. This involves using tools that enable the visual depiction of trends, anomalies, and patterns within the data, employing elements such as charts, graphs, and maps. Furthermore, it serves as a valuable resource for professionals and entrepreneurs to effectively communicate data to individuals who may not have a technical background.
 
 ```
 library(tm)
