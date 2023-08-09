@@ -639,8 +639,8 @@ endDate = '2022-03-25 23:59:59' #set end date
 scrapeTweet(searchTerms, limit, startDate, endDate, outputFile)
 ```
 
-| Month    | Savings |
+| Presidential Candidate    | Tweets |
 | -------- | ------- |
-| January  | $250    |
-| February | $80     |
-| March    | $420    |
+| Leni G. Robredo  | 36,941    |
+| Ferdinand R. Marcos Jr. | 13,063     |
+| Francisco M. Domagoso| 4,595    |
