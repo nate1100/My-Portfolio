@@ -612,7 +612,7 @@ print(least_val)
 *Implement an algorithm to classify the tweets, whether they're positive or negative.
 *Present the graphical representation of sentiments on Twitter for predicting electoral outcomes.
 
-##Data Collection
+## Data Collection
 TWINT was used to extract tweets in the Twitter. TWINT allowed the researchers to bypass the constraints of the Twitter API, it also has the advantage of being easy to use, 
 ```
 import twint
@@ -644,3 +644,323 @@ scrapeTweet(searchTerms, limit, startDate, endDate, outputFile)
 | Leni G. Robredo  | 36,941    |
 | Ferdinand R. Marcos Jr. | 13,063     |
 | Francisco M. Domagoso| 4,595    |
+
+## DATA PREPROCESSING
+
+### Fist Stage of Cleaning
+*Noise characters such as punctuations, symbols, extra white spaces, new line characters conversion to space, single characters such as ‘t’ and ‘d’ and numbers resulted from any form of text cleaning has been removed. Moreover, all the uppercase of the dataset have been converted to lowercase and empty tweets resulted from the data cleaning have been removed to further clean the dataset.*
+
+```
+library(tidyverse)    
+
+#First stage of cleaning
+
+tweetCleaner <- function(tweet) {
+    cleanTweet <- tweet
+    
+    # Remove URLs
+    cleanTweet <- str_remove_all(cleanTweet, " ?(f|ht)(tp)(s?)(://)(.*)[.|/](.*)")
+    
+    # Remove mentions
+    cleanTweet <- str_remove_all(cleanTweet, "@[[:alnum:]_]{4,}")
+    
+    # Remove Hashtags
+    cleanTweet <- str_remove_all(cleanTweet, "#[[:alnum:]_]+")
+    
+    # Remove punctuation
+    cleanTweet <- str_remove_all(cleanTweet, "[[:punct:]]")
+    
+    # Remove Retweets RT:
+    cleanTweet <- str_remove_all(cleanTweet, "^RT:? ")
+    
+    # Replace newline characters with a space
+    cleanTweet <- str_replace_all(cleanTweet, "\\\n", " ")
+    
+    # Convert to Lowercase
+    cleanTweet <- str_to_lower(cleanTweet)
+
+    return(cleanTweet)
+}
+
+
+#Only preserve 'tweet' attribute
+createDataFrame <- function(cleanTweet) {
+  newDataFrame <- data.frame(tweet = c(cleanTweet))
+  return(newDataFrame)
+}
+
+#Edit what file is to be cleaned
+inputFile <- "sample.csv"
+outputFile <- "sameple_o.csv"
+
+readFile <- read.csv(inputFile)
+cleanTweet <- tweetCleaner(readFile$tweet)
+newDataFrame <- createDataFrame(cleanTweet)
+write.csv(newDataFrame, outputFile)
+```
+### Second Stage of Cleaning
+*The usage of emoji in a tweet is common for twitter users, it may be used in future studies in sentimental analysis but since this study is focused on texts, any emoji has been removed. Emojis are read as Unicode characters so a string pattern ‘<U+ >’ have been used to eliminate such emojis. Conversion of non-ascii characters to its alphabet counterpart. Example of this is ‘â’ to ‘a’. It is uncommon for users to look at these type of characters to be stylish but some do, so it is considered to be converted for a cleaner data.*
+
+```
+library(tidyverse)    
+library(stringi)
+
+tweetCleaner <- function(tweet) {
+    cleanTweet <- tweet
+    
+    #Remove unicode characters (emojis <U+*> pattern )
+    cleanTweet <- gsub("[<].*[>]", "", cleanTweet)
+    
+    #Non-ascii text conversion to preserve text
+    cleanTweet <- stri_trans_general(cleanTweet, "latin-ascii")
+    
+    #Remove any alphanumeric symbols left
+    cleanTweet <- str_replace_all(cleanTweet, "[^[:alnum:]]", " ")
+    
+    #Remove leading and trailing white space
+    cleanTweet <- gsub("^\\s+|\\s+$", "", cleanTweet)
+
+    #Remove extra white space
+    cleanTweet <- gsub("\\s+", " ", cleanTweet)
+    
+    return(cleanTweet)
+}
+
+#Only preserve 'tweet' attribute
+createDataFrame <- function(cleanTweet) {
+  newDataFrame <- data.frame(tweet = c(cleanTweet))
+  return(newDataFrame)
+}
+
+#Enter file name for input and output
+inputFile <- "sample.csv"
+outputFile <- "sample.o.csv"
+
+readFile <- read.csv(inputFile)
+cleanTweet <- tweetCleaner(readFile$tweet)
+newDataFrame <- createDataFrame(cleanTweet)
+#Removing empty tweets and creating new clean data frame
+newDataFrame <- newDataFrame[!(is.na(newDataFrame$tweet) | newDataFrame$tweet==""),]
+newDataFrame <- createDataFrame(newDataFrame)
+write.csv(newDataFrame, outputFile)
+```
+### Stop words Removal
+*The researchers removed English stop words dictionary that is provided by the R library ‘tm’. English stop words such as ‘the’, ‘is’, ‘are’ are removed from the document. To remove Tagalog stop words, the researchers manually checked the data set’s texts using text frequencies. Tagalog stop words such as ‘sa’, ‘akin’, and ‘ko’ have been identified and removed from the data set as these words do not convey any sentiments.*
+
+```
+removeStopWords <- function(tweet) {
+  
+  cleanTweet <- tweet
+  
+  cleanTweet <- VectorSource(cleanTweet)
+  cleanTweet <- VCorpus(cleanTweet)
+  
+  #remove extra numbers before stop words removal
+  cleanTweet <- tm_map(cleanTweet, removeNumbers)
+  
+  #remove english stop words
+  cleanTweet <- tm_map(cleanTweet, removeWords, stopwords("english"))
+  
+  #Read custom filipino stop words
+  stopwords <- read.csv("Stopwords.csv", header = FALSE)
+  stopwords <- as.character(stopwords$V1)
+  stopwords <- c(stopwords, stopwords())
+  
+  #remove custom filipino stop words
+  cleanTweet <- tm_map(cleanTweet, removeWords, stopwords)
+  
+  #https://stackoverflow.com/questions/38710286/how-to-save-tm-map-output-to-csv-file
+  #Convert vector corpus to data frame
+  cleanTweet<-data.frame(text=unlist(sapply(cleanTweet, `[`, "content")), stringsAsFactors=F)
+  
+  return(cleanTweet)
+}
+
+tweetCleaner <- function(tweet) { #remove any extra noise after stop words removal
+  cleanTweet <- tweet
+  
+  #remove single letters
+  cleanTweet <- gsub(pattern="\\b[A-z]\\b{1}", replace=" ", cleanTweet)
+  
+  #Remove laughs such as Lololol or hahaha patterns
+  cleanTweet <- gsub("\\b(?:a*(?:ha)+h?|(?:l+o+)+l+)\\b", " ", cleanTweet)
+  cleanTweet <- gsub("\\b(a*ha+h[ha]*|o?l+o+l+[ol]*)\\b", " ", cleanTweet)
+  
+  #Remove extra white space
+  cleanTweet <- gsub("\\s+", " ", cleanTweet)
+  
+  #Remove leading and trailing white space
+  cleanTweet <- gsub("^\\s+|\\s+$", "", cleanTweet)
+  
+  return(cleanTweet)
+}
+
+```
+### Stemming
+*The R library ‘tm’ provides Porter’s algorithm to stem a document, it is only limited to English words. English stemming is only used for the reason that there are only a few of public algorithms that focuses on outputting stemmed tagalog words.*
+
+```
+library(tm)
+
+stem <- function(tweet) {
+  
+  cleanTweet <- tweet
+  cleanTweet <- VectorSource(cleanTweet)
+  cleanTweet <- VCorpus(cleanTweet)
+  
+  #stem document using porter stem algorithm
+  cleanTweet <- tm_map(cleanTweet, stemDocument)
+  
+  #https://stackoverflow.com/questions/38710286/how-to-save-tm-map-output-to-csv-file
+  #Convert vector corpus to data frame
+  cleanTweet<-data.frame(text=unlist(sapply(cleanTweet, `[`, "content")), stringsAsFactors=F)
+  
+  return(cleanTweet)
+}
+
+tweetCleaner <- function(tweet) { #remove any extra noise after stemming
+  cleanTweet <- tweet
+  
+  #remove single letters
+  cleanTweet <- gsub(pattern="\\b[A-z]\\b{1}", replace=" ", cleanTweet)
+  
+  #Remove extra white space
+  cleanTweet <- gsub("\\s+", " ", cleanTweet)
+  
+  #Remove leading and trailing white space
+  cleanTweet <- gsub("^\\s+|\\s+$", "", cleanTweet)
+  
+  return(cleanTweet)
+}
+
+createDataFrame <- function(cleanTweet) {
+  newDataFrame <- data.frame(tweet = c(cleanTweet))
+  return(newDataFrame)
+}
+
+```
+
+## Data Visualization
+
+```
+library(tm)
+library(wordcloud)
+library(stringr) 
+library(syuzhet)
+library(ggplot2)
+library(tidyverse)
+library(tidytext)
+
+#set directory
+getwd()
+
+#import csv file
+tweets <- read.csv(file.choose(), stringsAsFactors = FALSE)
+review <- as.character(tweets$tweet)
+review
+
+#build corpus
+library(tm)
+corpus <- iconv(tweets$tweet, to = "utf-8")
+corpus <- Corpus(VectorSource(corpus))
+inspect(corpus[1:5])
+
+
+#term document matrix
+tdm <- TermDocumentMatrix(corpus)
+tdm
+tdm <- as.matrix(tdm)
+inspect(tdm[1:10, 1:20])
+
+#sort by decreasing value of frequency
+tdm <- sort(rowSums(tdm),decreasing=TRUE)
+tdm <- data.frame(word = names(tdm),freq=tdm)
+
+```
+### Most Frequent Words
+*The figures below are the visual representation of the top 20 most frequent words for the three candidates. It can be seen that the most frequent words that appear for the three candidates are their names. The figures also showed that the words "leni" and "bbm" are the most frequent words that appear among the graphs of the three candidates.*
+
+
+```
+#display the top 20 most frequent words
+head(tdm, 20)
+
+#plot the most frequent words
+barplot(tdm[1:20,]$freq, las = 2, names.arg = tdm[1:20,]$word,
+        col ="blue", main ="Top 20 Most Frequent Words (Isko)",
+        ylab = "Word frequencies")
+```
+![](images/Picture10.png)
+![](images/Picture10.png)
+![](images/Picture10.png)
+
+
+### Word Clouds
+*Preprocessed data analysis also includes the creation of a word cloud, also known as a text cloud. It is used in sentiment analysis as a virtual representation of text data. This stage also included the installation of packages such as the text mining package (tm) and the word cloud generator package (word cloud) to analyze texts and present the keywords as a word cloud. The bigger the words in the word cloud, the more frequently they occur in the corpus.*
+
+```
+#generate word cloud
+set.seed(1234)
+wordcloud(words = tdm$word, freq = tdm$freq, min.freq = 5,
+          max.words=100, random.order=FALSE, rot.per=0.40, 
+          colors=brewer.pal(8, "Dark2"))
+```
+![](images/Picture10.png)
+![](images/Picture10.png)
+![](images/Picture10.png)
+
+ ```  
+#bar plot for random words
+w <- rowSums(tdm)
+w <- subset(w, w>=20)
+barplot(w,
+        las = 2,
+        col = rainbow(50))
+```
+![](images/Picture10.png)
+
+```
+#sentiment Analysis using NRC dictionary- based approach
+#obtain sentiment scores
+get_nrc_sentiment("happy")
+get_nrc_sentiment("excitement")
+get_nrc_sentiment("dumb")
+
+s <- get_nrc_sentiment(review)
+
+#combine text and sentiment column
+review_sentiment<-cbind(tweets$tweet,s)
+table(review_sentiment['positive'])
+
+#analyze sentiments using the syuzhet package based on the NRC sentiment dictionary
+emotions <- get_nrc_sentiment(tweets$tweet)
+emo_bar <- colSums(emotions)
+emo_sum <- data.frame(count=emo_bar, emotions=names(emo_bar))
+
+#calculating sentiments using function calculate_sentiment.
+
+head(emotions,10)
+
+#bar plot for sentiment scores
+barplot(colSums(s), col = rainbow(10), ylab = 'count', main = 'Sentiment Results (leni)')
+```
+![](images/Picture10.png)
+![](images/Picture10.png)
+![](images/Picture10.png)
+
+```
+#plot the count of words associated with 8 emotions, expressed as a percentage
+barplot(
+  sort(colSums(prop.table(s[, 1:8]))), 
+  horiz = TRUE, 
+  cex.names = 0.7, 
+  las = 1, 
+  main = "Emotion in Text ", xlab="Percentage"
+)
+```
+![](images/Picture10.png)
+![](images/Picture10.png)
+![](images/Picture10.png)
+
+
+
