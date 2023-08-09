@@ -953,10 +953,10 @@ barplot(
 ![](images/B11.png)
 ![](images/B12.png)
 
-# PROJECT 2: Analysis of a Tumor Dataset Using Association Rule Mining in R and WEKA <br />
+# PROJECT 3: Analysis of a Tumor Dataset Using Association Rule Mining in R and WEKA <br />
 ## Project Overview
 *The Apriori algorithm and filtered associator algorithm are applied in the tumor dataset to analyze the relationships between locations of tumors in each class and to make a comparison of the performance of the two applied algorithms.<br/>
-*Create data visualizations using Weka and R. 
+*Create data visualizations using Weka tool and R. 
 
 ## Dataset Used
 The primary tumor dataset has been selected for analysis of the association rule. The dataset was obtained from the University Medical Centre, Institute of Oncology, Ljubljana, Yugoslavia[18] and downloaded directly from openml.org. It is composed of 18 attributes, 339 instances and one class attribute. The dataset is also composed of attributes about the primary tumor locations. These locations are the parts of the body where the tumor first appeared and then spread to other parts of the body.
