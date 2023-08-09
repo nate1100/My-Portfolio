@@ -604,3 +604,11 @@ print(least_val)
 *The results of the experiments show that combining K-fold Cross Validation and Correlation-based Feature Selection obtained the highest achieved evaluation score for Random Forest resulting in an accuracy of 93.78%, precision of 94.94%, recall of 89.34% and F-1 score of 92.05 which outperforms the XGBoost and SVM algorithms.<br />
 *The most significant features based on the scoring function of Correlation-based Feature Selection are path length, URL depth, number of subdirectories, entropy, and URL length.<br />
 *The Random Forest has been successfully applied and integrated into the browser-based extension, which automatically identifies the classification of URLs (phishing or legitimate).
+
+
+# PROJECT 2: Sentiment Analysis of Twitter Data in Predicting the Philippines’ Winning Presidential Candidate <br />
+## Project Overview
+*Determine the attitudes and feelings of people in selecting candidates for the coming election through tweets
+*Implement an algorithm to classify the tweets, whether they're positive or negative.
+*Present the graphical representation of sentiments on Twitter for predicting electoral outcomes.
+
