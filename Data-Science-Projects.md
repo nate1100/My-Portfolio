@@ -955,7 +955,7 @@ barplot(
 
 # PROJECT 2: Analysis of a Tumor Dataset Using Association Rule Mining in R and WEKA <br />
 ## Project Overview
-*The Apriori algorithm and filtered associator algorithm are applied in the tumor dataset to analyze the relationships between locations of tumors in each class and to make a comparison of the performance of the two applied algorithms. 
+*The Apriori algorithm and filtered associator algorithm are applied in the tumor dataset to analyze the relationships between locations of tumors in each class and to make a comparison of the performance of the two applied algorithms.<br/>
 *Create data visualizations using Weka and R. 
 
 ## Dataset Used
