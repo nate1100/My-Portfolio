@@ -982,7 +982,7 @@ Classes, the most common location where the tumor has metastasized is the lungs.
 
 ![](images/C4.png)
 
-### Mined rules using Apriori Algorithm
+### Mined Rules using Apriori Algorithm
 
 The figure presents the visualizations of the results from the mined rules using apriori algorithm. The plot function and its graph parameter has been used. The closer the rule node is to the center, the more significant it is.
 
