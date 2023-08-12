@@ -1,0 +1,88 @@
+/**
+timetable
+**/
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+body {
+    background: #d8d8d8 none repeat scroll 0 0;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+.time-table{
+    position: absolute;
+    color: #666;
+    font-size: 12px;
+    width: 300px;
+    top: 120px;
+    left: 300px;
+}
+h3{
+    position: absolute;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    top: -10%;
+    left: 250px;
+}
+.time-table h4{
+    position: absolute;
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+    right: 80%;
+    bottom: -70px;
+}
+.timetable th {
+    padding: 10px 15px 12px;
+    width: 12.5%;
+}
+.timetable .event_container {
+    padding: 10px 15px 12px;
+}
+.timetable td {
+    height: 31px;
+    vertical-align: top;
+    width: 15%;
+    color: black;
+    align-items: center;
+}
+.timetable .event {
+    background-color: #3156a3;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    color: #fff;
+    line-height: 150%;
+}
+.timetable .row_gray {
+    background-color: #f0f0f0;
+}
+.timetable .white {
+    background-color: gray;
+}
+.btn-primary{
+    font-size: 9px;
+}
+.action{
+    display: flex;
+    position: absolute;
+    font-size: 9px;
+    left: 500px;
+    top: 500px;
+}
+button[type="btn"]{
+    position: absolute;
+    font-size: 12px;
+    margin: 3px;
+    top: 120%;
+    left: 500px;
+}
