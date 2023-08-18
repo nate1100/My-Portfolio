@@ -608,8 +608,8 @@ print(least_val)
 
 # PROJECT 2: Sentiment Analysis of Twitter Data in Predicting the Philippines’ Winning Presidential Candidate <br />
 ## Project Overview
-*Determine the attitudes and feelings of people in selecting candidates for the coming election through tweets
-*Implement an algorithm to classify the tweets, whether they're positive or negative.
+*Determine the attitudes and feelings of people in selecting candidates for the coming election through tweets. <br />
+*Implement an algorithm to classify the tweets, whether they're positive or negative.<br />
 *Present the graphical representation of sentiments on Twitter for predicting electoral outcomes.
 
 ## Data Collection
