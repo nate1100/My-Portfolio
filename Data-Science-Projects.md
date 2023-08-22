@@ -953,6 +953,19 @@ barplot(
 ![](images/B11.png)
 ![](images/B12.png)
 
+### Sentiment Classification 
+The manually annotated data will be used as the input for the machine learning classification techniques. The training and testing dataset with 8,852 instances will be used to evaluate the performance of the sentiment classification.
+
+### Classification Algorithms 
+
+|Classifier Model|Naïve Bayes|SVM |Random Forest|Decision Tree|
+| -------- | ------- |------- |------- |------- |
+|Accuracy |	100% | 67.27% | 67.48% | 68.42%|
+|Precision| 100% | 96.925 | 96.66% | 97.07%|
+|Recall | 100%|  67.61% | 67.85% |68.34%|
+|F1 Score| 100%| 79.65%| 79.73%	| 80.21%|
+
+
 # PROJECT 3: Analysis of a Tumor Dataset Using Association Rule Mining in R and WEKA <br />
 ## Project Overview
 *The Apriori algorithm and filtered associator algorithm are applied in the tumor dataset to analyze the relationships between locations of tumors in each class and to make a comparison of the performance of the two applied algorithms.<br/>
