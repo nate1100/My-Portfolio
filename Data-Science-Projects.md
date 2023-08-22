@@ -985,7 +985,13 @@ dataset$Class = tweet$sentiment
 str(dataset$Class)
 prop.table(table(dataset$Class))
 dataset_convert = dim(dataset)[2]
+```
 
+| negative | neutral | positive |
+| -------- | ------- |------- |
+|0.2158834| 0.1246046| 0.6595120|
+
+```
 #data split
 set.seed(724318)
 split = sample(2,nrow(dataset),prob = c(2/3, 1/3),replace = TRUE)
@@ -1001,10 +1007,10 @@ prop.table(table(test_set$Class)) #skewed to positive
 
 ```
 
+### Model Training
+Repeated cross validation techniques was also used as it has proven to increase the performance of each algorithm for this type of dataset. The split ratio for the training set will be two-thirds (2/3) of the total dataset and for the testing set, one-third (1/3) ratio will be used.
 
 ```
-#Model Training
-
 #Cross Validation
 library(caret)
 control <- trainControl(method="repeatedcv",  
@@ -1023,7 +1029,15 @@ system.time(classifier_nb <- naiveBayes(train_set,
 nb_pred = predict(classifier_nb, type = 'class', newdata = test_set)
 confusionMatrix(table(nb_pred, test_set$Class))
 
+```
+|nb_pred   | negative | neutral | positive| 
+| -------- | ------- |------- |------- |
+ | negative   |  645    |   0     |   0|
+ | neutral  |       0     360   |     0|
+|  positive  |      0   |    0   |  1919|
 
+
+```
 #2. SVM Model
 svm_classifier <- svm(Class~.,
                       data=train_set,
@@ -1031,7 +1045,15 @@ svm_classifier <- svm(Class~.,
 #Predictor + Confusion Matrix
 svm_pred = predict(svm_classifier, test_set)
 confusionMatrix(table(svm_pred, test_set$Class))
+```
 
+|svm_pred  | negative| neutral| positive|
+| -------- | ------- |------- |------- |
+|  negative |     107  |     7   |    59|
+|  neutral   |      0|       0  |      0|
+|  positive |     538   |  353  |   1860|
+
+```
 #3. Random Forest Classifier Model
 library(randomForest)
 rf_classifier = randomForest(x = train_set[-dataset_convert],
@@ -1042,9 +1064,15 @@ rf_classifier = randomForest(x = train_set[-dataset_convert],
 #Predictor + Confusion Matrix
 rf_pred = predict(rf_classifier, newdata = test_set[-dataset_convert])
 confusionMatrix(table(rf_pred, test_set$Class))
+```
+|rf_pred  |  negative| neutral |positive|
+| -------- | ------- |------- |------- |
+|  negative   |   118    |   7    |   63|
+ | neutral   |      1 |      0    |    1|
+ | positive    |  526    | 353   |  1855|
 
-
-
+ 
+```
 #4. Decision Tree Model using CART
 #URL https://www.kaggle.com/code/suzanaiacob/sentiment-analysis-of-the-yelp-reviews-data#Exploratory-Data-Analysis
 #Uses different data frame and splitting of data
@@ -1084,8 +1112,15 @@ confusionMatrix(table(cart_predictor, test_set1$positive))
 
 ```
 
+|cart_predictor |FALSE| TRUE|
+| -------- | ------- |------- |
+        | FALSE|   130 |  57|
+        | TRUE  |  875| 1889|
 
 
+
+### Average Results 
+Based on the results, the model based on Naïve Bayes has the highest accuracy rate of 100% among other classifiers. It was followed by the Decision Tree with overfitting with 68.42% and the random forest with 67.48%. Lastly, SVM has the lowest accuracy rate of 67.27% among the four algorithms used for the given dataset. The results show that Nave Bayes is the best performing approach for classifying sentiments on the collected data set, with 100% accuracy, precision, recall, and F1 score.
 
 |Classifier Model|Naïve Bayes|SVM |Random Forest|Decision Tree|
 | -------- | ------- |------- |------- |------- |
