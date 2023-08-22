@@ -1113,8 +1113,8 @@ confusionMatrix(table(cart_predictor, test_set1$positive))
 
 |cart_predictor |FALSE| TRUE|
 | -------- | ------- |------- |
-        | FALSE|   130 |  57 |
-        | TRUE  |  875| 1889|
+| FALSE|   130 |  57 |
+| TRUE  |  875| 1889|
 
 
 
