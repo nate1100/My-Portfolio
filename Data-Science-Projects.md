@@ -844,38 +844,20 @@ createDataFrame <- function(cleanTweet) {
 Data visualization refers to the representation of information and data through visual means. This involves using tools that enable the visual depiction of trends, anomalies, and patterns within the data, employing elements such as charts, graphs, and maps. Furthermore, it serves as a valuable resource for professionals and entrepreneurs to effectively communicate data to individuals who may not have a technical background.
 
 ```
+
 library(tm)
-library(wordcloud)
-library(stringr) 
-library(syuzhet)
-library(ggplot2)
+library(e1071)
 library(tidyverse)
-library(tidytext)
+library(rpart)
+library(caret)
+library(RTextTools)
+library(SparseM)
 
-#set directory
-getwd()
-
-#import csv file
-tweets <- read.csv(file.choose(), stringsAsFactors = FALSE)
-review <- as.character(tweets$tweet)
-review
-
-#build corpus
-library(tm)
-corpus <- iconv(tweets$tweet, to = "utf-8")
-corpus <- Corpus(VectorSource(corpus))
-inspect(corpus[1:5])
-
-
-#term document matrix
-tdm <- TermDocumentMatrix(corpus)
-tdm
-tdm <- as.matrix(tdm)
-inspect(tdm[1:10, 1:20])
-
-#sort by decreasing value of frequency
-tdm <- sort(rowSums(tdm),decreasing=TRUE)
-tdm <- data.frame(word = names(tdm),freq=tdm)
+#Import Library
+data <- read.csv('input.csv', col.names = c("Sentiment", "Corpus"))
+summary(data)
+str(data)
+table(data$Sentiment)
 
 ```
 ### Most Frequent Words
@@ -883,12 +865,29 @@ tdm <- data.frame(word = names(tdm),freq=tdm)
 
 
 ```
-#display the top 20 most frequent words
+
+#build corpus
+library(tm)
+corpus <- iconv(data$Corpus, to = "utf-8")
+corpus <- Corpus(VectorSource(corpus))
+inspect(corpus[1:5])
+
+#term document matrix
+tdm <- TermDocumentMatrix(corpus)
+tdm
+tdm <- as.matrix(tdm)
+inspect(tdm[1:10, 1:20])
+
+# Sort by decreasing value of frequency
+tdm <- sort(rowSums(tdm),decreasing=TRUE)
+tdm <- data.frame(word = names(tdm),freq=tdm)
+
+# Display the top 20 most frequent words
 head(tdm, 20)
 
-#plot the most frequent words
+# Plot the most frequent words
 barplot(tdm[1:20,]$freq, las = 2, names.arg = tdm[1:20,]$word,
-        col ="blue", main ="Top 20 Most Frequent Words (Isko)",
+        col ="blue", main ="Top 20 Most Frequent Words (Candidate Name)",
         ylab = "Word frequencies")
 ```
 ![](images/B4.png)
