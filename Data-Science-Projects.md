@@ -1032,10 +1032,9 @@ confusionMatrix(table(nb_pred, test_set$Class))
 ```
 |nb_pred   | negative | neutral | positive| 
 | -------- | ------- |------- |------- |
- | negative   |  645    |   0     |   0|
- | neutral  |       0     360   |     0|
-|  positive  |      0   |    0   |  1919|
-
+ | negative  |  645  |  0  |  0|
+ | neutral  |  0  | 360   |  0|
+|  positive | 0  |  0  |  1919|
 
 ```
 #2. SVM Model
@@ -1049,9 +1048,9 @@ confusionMatrix(table(svm_pred, test_set$Class))
 
 |svm_pred  | negative| neutral| positive|
 | -------- | ------- |------- |------- |
-|  negative |     107  |     7   |    59|
-|  neutral   |      0|       0  |      0|
-|  positive |     538   |  353  |   1860|
+|  negative |   107  |   7   |  59|
+|  neutral   |   0|     0  |    0|
+|  positive |   538   |  353  |  1860|
 
 ```
 #3. Random Forest Classifier Model
@@ -1067,9 +1066,9 @@ confusionMatrix(table(rf_pred, test_set$Class))
 ```
 |rf_pred  |  negative| neutral |positive|
 | -------- | ------- |------- |------- |
-|  negative   |   118    |   7    |   63|
- | neutral   |      1 |      0    |    1|
- | positive    |  526    | 353   |  1855|
+|  negative   |  118  |  7   |   63|
+ | neutral   |   1 |   0  |  1 |
+ | positive  |  526   | 353   |  1855 |
 
  
 ```
@@ -1114,7 +1113,7 @@ confusionMatrix(table(cart_predictor, test_set1$positive))
 
 |cart_predictor |FALSE| TRUE|
 | -------- | ------- |------- |
-        | FALSE|   130 |  57|
+        | FALSE|   130 |  57 |
         | TRUE  |  875| 1889|
 
 
