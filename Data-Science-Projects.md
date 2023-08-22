@@ -1131,7 +1131,9 @@ Based on the results, the model based on Naïve Bayes has the highest accuracy r
 
 
 ## Conclusion 
-Manual annotation and preprocessing of data have also improved the ML algorithms which made it more efficient to classify the datasets. The result also shows that Naïve Bayes with a 100% accuracy rate was the most efficient and accurate ML approach among the other models.
+*Text mining and sentimental analysis have enabled us to acquire, analyze, visualize and interpret data particularly during elections. <br />
+*Manual annotation and preprocessing of data have also improved the ML algorithms which made it more efficient to classify the datasets. The result also shows that Naïve Bayes with a 100% accuracy rate was the most efficient and accurate ML approach among the other models.<br />
+*The result also shows that Naïve Bayes with a 100% accuracy rate was the most efficient and accurate ML approach among the other models in classifying dataset. 
 
 # PROJECT 3: Analysis of a Tumor Dataset Using Association Rule Mining in R and WEKA <br />
 ## Project Overview
