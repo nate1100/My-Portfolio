@@ -1,4 +1,4 @@
-# Power BI Portfolio Projects
+# POWER BI PORTFOLIO PROJECTS 
 Hola! Welcome to my Power BI portfolio repository! Within this repository, you'll discover the collection of my Power BI projects and dashboards to showcase my expertise and skills in data visualization and analytics through Power BI. <br />
 
 ## Project 1: Accident Analysis
