@@ -96,23 +96,23 @@ It handles the full daily workflow of a small retail shop: logging cashiers in, 
 
 | Login |
 |---|---|
-| ![Login](images/login.png) | ![Login](images/login.png) |
+|![Login](images/login.png) |
 
 | Dashboard
 |---|---|
-| ![POS](screenshots/pos.png) | ![Dashboard](images/dashboard.png) |
+|![Dashboard](images/dashboard.png) |
 
 | Point of Sale 
 |---|---|
-| ![POS](screenshots/pos.png) | ![POS](images/POS.png) |
+|![POS](images/POS.png) |
 
 | Reports |
 |---|---|
-| ![Inventory](screenshots/inventory.png) | ![Reports](images/reports.png) |
+|![Reports](images/reports.png) |
 
 | User Management |
 |---|---|
-| ![Inventory](screenshots/inventory.png) | ![Reports](images/userm.png) |
+|![User Management](images/userm.png) |
 
 <!--
 Suggested screenshots to capture and add:
