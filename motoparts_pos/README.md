@@ -1,6 +1,6 @@
 # 🏍️ Edrik Motorshop — POS & Inventory Management System
 
-A desktop **Point of Sale (POS) and Inventory Management System** built for a motorcycle parts & accessories shop. Fully offline, single-file SQLite backend, role-based access for admins and cashiers, and a modern dark-themed UI built with `customtkinter`.
+A desktop **Point of Sale (POS) and Inventory Management System** built for our family business. Fully offline, single-file SQLite backend, role-based access for admins and cashiers, and a modern dark-themed UI built with `customtkinter`.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
 ![CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-1f6feb)
@@ -94,17 +94,25 @@ It handles the full daily workflow of a small retail shop: logging cashiers in, 
 
 > Screenshots go here — add exported `.png` images to a `/screenshots` folder in your repo and reference them below.
 
-| Login | Dashboard |
+| Login |
 |---|---|
-| ![Login](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
+| ![Login](images/login.png) | ![Login](images/login.png) |
 
-| Point of Sale | Products |
+| Dashboard
 |---|---|
-| ![POS](screenshots/pos.png) | ![Products](screenshots/products.png) |
+| ![POS](screenshots/pos.png) | ![Dashboard](images/dashboard.png) |
 
-| Inventory | Reports |
+| Point of Sale 
 |---|---|
-| ![Inventory](screenshots/inventory.png) | ![Reports](screenshots/reports.png) |
+| ![POS](screenshots/pos.png) | ![POS](images/POS.png) |
+
+| Reports |
+|---|---|
+| ![Inventory](screenshots/inventory.png) | ![Reports](images/reports.png) |
+
+| User Management |
+|---|---|
+| ![Inventory](screenshots/inventory.png) | ![Reports](images/userm.png) |
 
 <!--
 Suggested screenshots to capture and add:
@@ -222,12 +230,6 @@ On first launch the app initializes its local SQLite database automatically. Log
 
 ---
 
-## 📄 License
-
-This project is available for portfolio and educational reference. Add your preferred license (e.g. MIT) here.
-
----
-
 ## 👤 Author
 
-Built by **[Your Name]** — [GitHub](https://github.com/<your-username>) · [Portfolio](https://yourportfolio.com)
+Built by **Eden Rose Nate** — [GitHub](https://github.com/nate1100) · [Portfolio](https://nate1100.github.io/)
