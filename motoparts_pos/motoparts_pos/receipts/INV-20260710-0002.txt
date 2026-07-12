@@ -1,0 +1,25 @@
+             Edrik Motorshop              
+      Purok 1, Comun, Camalig, Albay      
+            Tel: 0912-938-5083            
+==========================================
+Invoice #:               INV-20260710-0002
+Date:                  2026-07-10 19:38:37
+Cashier:                     Administrator
+Customer:                          Walk-in
+------------------------------------------
+Item                 Qty   Price     Total
+------------------------------------------
+Leo Laser              1  780.00    780.00
+Front Shock            1 1200.00   1200.00
+------------------------------------------
+Subtotal:                       PHP1980.00
+Discount:                        -PHP39.60
+Tax (5.0%):                       PHP97.02
+==========================================
+TOTAL:                          PHP2037.42
+Payment:                              Cash
+Amount Paid:                    PHP2500.00
+Change:                          PHP462.58
+==========================================
+Thank you for your purchase! No return, no
+          exchange after 7 days.          

@@ -1,0 +1,23 @@
+             Edrik Motorshop              
+      Purok 1, Comun, Camalig, Albay      
+            Tel: 0912-938-5083            
+==========================================
+Invoice #:               INV-20260710-0004
+Date:                  2026-07-10 20:25:36
+Cashier:                     Administrator
+Customer:                          Walk-in
+------------------------------------------
+Item                 Qty   Price     Total
+------------------------------------------
+Tube 250x17            1  180.00    180.00
+------------------------------------------
+Subtotal:                        PHP180.00
+Tax (5.0%):                        PHP9.00
+==========================================
+TOTAL:                           PHP189.00
+Payment:                              Cash
+Amount Paid:                     PHP200.00
+Change:                           PHP11.00
+==========================================
+Thank you for your purchase! No return, no
+          exchange after 7 days.          

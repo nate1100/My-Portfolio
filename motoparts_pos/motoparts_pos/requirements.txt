@@ -1,0 +1,11 @@
+# Motorcycle Parts POS & Inventory Management System - Dependencies
+# Install with:  pip install -r requirements.txt
+
+customtkinter>=5.2.2      # Modern UI toolkit (built on Tkinter)
+openpyxl>=3.1.2           # Excel (.xlsx) export
+reportlab>=4.1.0          # PDF invoice / report generation
+
+# Windows only (optional, improves silent printing to the default printer).
+# pywin32 is not required — the app falls back to os.startfile()/PDF preview
+# if it isn't installed — but installing it gives the smoothest experience.
+pywin32>=306; sys_platform == "win32"

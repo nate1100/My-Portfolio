@@ -1,0 +1,27 @@
+             Edrik Motorshop              
+      Purok 1, Comun, Camalig, Albay      
+            Tel: 0912-938-5083            
+==========================================
+Invoice #:               INV-20260711-0001
+Date:                  2026-07-11 13:26:44
+Cashier:                     Administrator
+Customer:                          Walk-in
+------------------------------------------
+Item                 Qty   Price     Total
+------------------------------------------
+H/L COWLING ASSY       1  250.00    250.00
+BLACK W/SOCKET      
+REAR TIRE 11/80/14     1 2700.00   2700.00
+FEDERAL             
+CLUTCH HOUSING ASSY    1  580.00    580.00
+------------------------------------------
+Subtotal:                       PHP3530.00
+Tax (0.0%):                        PHP0.00
+==========================================
+TOTAL:                          PHP3530.00
+Payment:                              Cash
+Amount Paid:                    PHP5000.00
+Change:                         PHP1470.00
+==========================================
+Thank you for your purchase! No return, no
+          exchange after 7 days.          
