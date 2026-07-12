@@ -95,23 +95,18 @@ It handles the full daily workflow of a small retail shop: logging cashiers in, 
 > Screenshots go here — add exported `.png` images to a `/screenshots` folder in your repo and reference them below.
 
 | Login |
-|---|---|
 |![Login](images/login.png) |
 
 | Dashboard
-|---|---|
 |![Dashboard](images/dashboard.png) |
 
 | Point of Sale 
-|---|---|
 |![POS](images/POS.png) |
 
 | Reports |
-|---|---|
 |![Reports](images/reports.png) |
 
 | User Management |
-|---|---|
 |![User Management](images/userm.png) |
 
 <!--
