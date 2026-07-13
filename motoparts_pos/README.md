@@ -92,38 +92,21 @@ It handles the full daily workflow of a small retail shop: logging cashiers in, 
 
 ## 🖼️ Screenshots
 
-> Screenshots go here — add exported `.png` images to a `/screenshots` folder in your repo and reference them below.
+Login 
+|![Login](images/login.png) 
 
-| Login |
-|![Login](images/login.png) |
+Dashboard
+|![Dashboard](images/dashboard.png) 
 
-| Dashboard
-|![Dashboard](images/dashboard.png) |
+Point of Sale 
+|![POS](images/POS.png) 
 
-| Point of Sale 
-|![POS](images/POS.png) |
+Reports
+|![Reports](images/reports.png) 
 
-| Reports |
-|![Reports](images/reports.png) |
+User Management 
+|![User Management](images/userm.png) 
 
-| User Management |
-|![User Management](images/userm.png) |
-
-<!--
-Suggested screenshots to capture and add:
-1. Login screen
-2. Dashboard with stat cards + low stock panel
-3. POS screen mid-sale (cart populated)
-4. Products list with the Add Product dialog open
-5. Inventory > Stock Levels tab
-6. Inventory > Adjustment History tab
-7. Reports screen with charts/tables populated
-8. Settings > Store Info tab
-9. User Management screen
-10. A generated PDF invoice/receipt
--->
-
----
 
 ## 🏗️ Tech Stack
 
